@@ -1,0 +1,7 @@
+<h1>Bienvenue</h1>
+<h3>Cherches un film mon pote !</h3>
+<form action="/" method="post">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+  <input type="text" name="movie">
+  <input type="submit" name="submit" value="Submit">
+</form>
