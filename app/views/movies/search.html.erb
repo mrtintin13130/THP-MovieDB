@@ -1,5 +1,12 @@
 <h1>Les films</h1>
-<% @movie.each do |m| %>
-<%= m.title %>
-<br />
+<div class="d-flex flex-wrap justify-content-center">
+<% @movie.take(20).each do |m| %>
+<% link = "https://image.tmdb.org/t/p/w500/" + m.poster_path %>
+<div class="card" style="width: 23%; margin: 5px;">
+  <img class="card-img-top" src="<%= link %>" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title"><%= m.title %></h5>
+    <p class="card-text"><%= m.overview %></p>
+  </div>
+</div>
 <% end %>
