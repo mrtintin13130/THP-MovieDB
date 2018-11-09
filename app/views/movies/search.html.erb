@@ -1,12 +1,34 @@
-<h1>Les films</h1>
+<h1><center><b>Les films</b></center></h1>
+<center><%= link_to 'Accueil', '/', class: 'btn btn-primary' %></center>
+<br />
 <div class="d-flex flex-wrap justify-content-center">
-<% @movie.take(20).each do |m| %>
-<% link = "https://image.tmdb.org/t/p/w500/" + m.poster_path %>
-<div class="card" style="width: 23%; margin: 5px;">
-  <img class="card-img-top" src="<%= link %>" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title"><%= m.title %></h5>
-    <p class="card-text"><%= m.overview %></p>
-  </div>
+  <% if @movie.blank? %>
+    <h2>Aucun film trouvé</h2>
+  <% else %>
+    <% @movie.take(20).each do |m| %>
+      <% if m.poster_path.blank? %>
+        <div class="card" style="width: 23%; margin: 5px;">
+          <div class="card-body">
+            <h5 class="card-title"><%= m.title %></h5>
+            <p class="card-text">Sortie le: <i><%= m.release_date %></i></p>
+            <% if credit(m.id).blank? == false %>
+              <p class="card-text">Réalisateur: <i><%= credit(m.id) %></i></p>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <% link = "https://image.tmdb.org/t/p/w440_and_h660_bestv2/" + m.poster_path %>
+        <div class="card" style="width: 23%; margin: 5px;">
+          <img class="card-img-top" src="<%= link %>" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"><%= m.title %></h5>
+            <p class="card-text">Sortie le: <i><%= m.release_date %></i></p>
+            <% if credit(m.id).blank? == false %>
+              <p class="card-text">Réalisateur: <i><%= credit(m.id) %></i></p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>
-<% end %>
